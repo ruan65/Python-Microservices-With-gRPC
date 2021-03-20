@@ -9,7 +9,7 @@ from reccomendations_pb2 import (
     RecommendationResponse,
 )
 
-import reccomendations_pb2_grpc
+import reccomendations_pb2_grpc as service
 
 books_by_category = {
     BookCategory.MYSTERY: [
@@ -37,7 +37,7 @@ books_by_category = {
 }
 
 
-class RecommendationService(reccomendations_pb2_grpc.RecommendationsServicer):
+class RecommendationService(service.RecommendationsServicer):
     def Recommend(self, request, context):
         if request.category not in books_by_category:
             context.abort(grpc.StatusCode.NOT_FOUND, "Category not found")
@@ -51,7 +51,7 @@ class RecommendationService(reccomendations_pb2_grpc.RecommendationsServicer):
 
 def serve():
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
-    reccomendations_pb2_grpc.add_RecommendationsServicer_to_server(
+    service.add_RecommendationsServicer_to_server(
         RecommendationService(), server
     )
     server.add_insecure_port("[::]:50051")
