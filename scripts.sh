@@ -6,3 +6,6 @@
 # FLASK_APP=marketplace.py flask run
 
 # docker run -p 127.0.0.1:5000:5000/tcp --network microservices -e RECOMMENDATIONS_HOST=rec marketplace
+
+# docker compose exec marketplace pytest marketplace_integration_test.py
+# docker compose exec recommendations pytest recommendations_test.py
