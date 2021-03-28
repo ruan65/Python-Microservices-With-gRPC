@@ -3,13 +3,13 @@ import random
 
 import grpc
 
-from reccomendations_pb2 import (
+from recomendations_pb2 import (
     BookCategory,
     BookRecommendation,
     RecommendationResponse,
 )
 
-import reccomendations_pb2_grpc as service
+import recomendations_pb2_grpc as service
 
 books_by_category = {
     BookCategory.MYSTERY: [

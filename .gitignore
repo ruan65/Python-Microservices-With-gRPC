@@ -1,2 +1,7 @@
 .idea/
 venv/
+*.key
+*.pem
+*.csr
+__pycache__
+*/__pycache__

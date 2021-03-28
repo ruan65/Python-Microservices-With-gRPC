@@ -9,3 +9,14 @@
 
 # docker compose exec marketplace pytest marketplace_integration_test.py
 # docker compose exec recommendations pytest recommendations_test.py
+
+
+# Create CA certificate
+
+openssl req -x509 -nodes -newkey rsa:4096 -keyout ca.key -out ca.pem -subj /O=me
+
+# create a certificate for your server and sign it with your CA certificate:
+
+openssl req -nodes -newkey rsa:4096 -keyout server.key -out server.csr -subj /CN=recommendations
+
+openssl x509 -req -in server.csr -CA ca.pem -CAkey ca.key -set_serial 1 -out server.pem
