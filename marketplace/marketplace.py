@@ -2,14 +2,20 @@ import os
 from flask import Flask, render_template
 import grpc
 
-from reccomendations_pb2 import BookCategory, RecommendationsRequest
-from reccomendations_pb2_grpc import RecommendationsStub
+from recomendations_pb2 import BookCategory, RecommendationsRequest
+from recomendations_pb2_grpc import RecommendationsStub
 
 app = Flask(__name__)
 
 host = os.getenv("RECOMMENDATIONS_HOST", "localhost")
+print(f'got host var: {host}')
 channel = grpc.insecure_channel(f'{host}:50051')
 client = RecommendationsStub(channel)
+
+
+@app.route('/hello')
+def hello():
+    return 'hello'
 
 
 @app.route('/')

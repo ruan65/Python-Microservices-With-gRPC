@@ -2,7 +2,7 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
-import reccomendations_pb2 as reccomendations__pb2
+import recomendations_pb2 as recomendations__pb2
 
 
 class RecommendationsStub(object):
@@ -16,8 +16,8 @@ class RecommendationsStub(object):
         """
         self.Recommend = channel.unary_unary(
                 '/Recommendations/Recommend',
-                request_serializer=reccomendations__pb2.RecommendationsRequest.SerializeToString,
-                response_deserializer=reccomendations__pb2.RecommendationResponse.FromString,
+                request_serializer=recomendations__pb2.RecommendationsRequest.SerializeToString,
+                response_deserializer=recomendations__pb2.RecommendationResponse.FromString,
                 )
 
 
@@ -35,8 +35,8 @@ def add_RecommendationsServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'Recommend': grpc.unary_unary_rpc_method_handler(
                     servicer.Recommend,
-                    request_deserializer=reccomendations__pb2.RecommendationsRequest.FromString,
-                    response_serializer=reccomendations__pb2.RecommendationResponse.SerializeToString,
+                    request_deserializer=recomendations__pb2.RecommendationsRequest.FromString,
+                    response_serializer=recomendations__pb2.RecommendationResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -60,7 +60,7 @@ class Recommendations(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/Recommendations/Recommend',
-            reccomendations__pb2.RecommendationsRequest.SerializeToString,
-            reccomendations__pb2.RecommendationResponse.FromString,
+            recomendations__pb2.RecommendationsRequest.SerializeToString,
+            recomendations__pb2.RecommendationResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
